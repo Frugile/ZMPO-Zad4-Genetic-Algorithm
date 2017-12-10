@@ -109,7 +109,7 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 
 
 
-	stopDebugger = 42; //toTest
+	stopDebugger = 77; //toTest yea GIT :D
 
 
 
