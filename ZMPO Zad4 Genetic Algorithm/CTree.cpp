@@ -57,8 +57,8 @@ void CTree::refreshExpressionStringToTest()
 
 void CTree::crossover(CTree* secondTree)
 {
-	CNode** pp_thisTreePart;
-	CNode** pp_secondTreePart; //może nie bedzie potrzebne
+	CNode** pp_thisTreePart = nullptr;
+	CNode** pp_secondTreePart = nullptr; //może nie bedzie potrzebne
 
 	//chose thisTree node
 
@@ -66,13 +66,13 @@ void CTree::crossover(CTree* secondTree)
 		pp_thisTreePart = &p_root;
 	else
 	{
+		int choosenChildrenIndex = UsefullMethods::ifOccur(50) ? 0 : 1;
 		switch (p_root->nodeOperOrVar.at(0))
 		{
 		case PLUS:
 		case MINUS:
 		case MULTIPLICATION:
 		case DIVISION:
-			int choosenChildrenIndex = UsefullMethods::ifOccur(50) ? 0 : 1;
 			if (p_root->v_children.at(choosenChildrenIndex)->nodeType != OPERATORTYPE)
 				pp_thisTreePart = &(p_root->v_children.at(choosenChildrenIndex));
 			else
@@ -108,18 +108,65 @@ void CTree::crossover(CTree* secondTree)
 
 	}
 
+	//choose secondTree node //chwilowe roziwązanie
+
+	if (secondTree->p_root->nodeType != OPERATORTYPE)
+		pp_secondTreePart = &(secondTree->p_root);
+	else
+	{
+		int choosenChildrenIndex = UsefullMethods::ifOccur(50) ? 0 : 1;
+		switch (secondTree->p_root->nodeOperOrVar.at(0))
+		{
+		case PLUS:
+		case MINUS:
+		case MULTIPLICATION:
+		case DIVISION:
+			if (secondTree->p_root->v_children.at(choosenChildrenIndex)->nodeType != OPERATORTYPE)
+				pp_secondTreePart = &(secondTree->p_root->v_children.at(choosenChildrenIndex));
+			else
+				pp_secondTreePart = secondTree->p_root->v_children.at(choosenChildrenIndex)->choseCrossoverPart();
+			/*if (UsefullMethods::ifOccur(50))
+			{
+			if (p_root->v_children.at(0)->nodeType != OPERATORTYPE)
+			pp_thisTreePart = &(p_root->v_children.at(0));
+			else
+			pp_thisTreePart = p_root->v_children.at(0)->choseCrossoverPart();
+			}
+			else
+			{
+			if (p_root->v_children.at(1)->nodeType != OPERATORTYPE)
+			pp_thisTreePart = &(p_root->v_children.at(1));
+			else
+			pp_thisTreePart = p_root->v_children.at(1)->choseCrossoverPart();
+			}				*/
+			break;
+		case SIN[0]:
+		case COS[0]:
+			if (secondTree->p_root->v_children.at(0)->nodeType != OPERATORTYPE)
+				pp_secondTreePart = &(secondTree->p_root->v_children.at(0));
+			else
+				pp_secondTreePart = secondTree->p_root->v_children.at(0)->choseCrossoverPart();
+			break;
+		default:
+			cout << "Error7"; //toTest
+		}
 
 
 
-	//choose secondTree node
 
-
+	}
 
 
 	//swap
 
+	CNode* p_temp = *pp_thisTreePart;
+	*pp_thisTreePart = *pp_secondTreePart;
+	*pp_secondTreePart = p_temp;
+
 
 	//recalculate depths
+
+
 
 
 	//TODO: 

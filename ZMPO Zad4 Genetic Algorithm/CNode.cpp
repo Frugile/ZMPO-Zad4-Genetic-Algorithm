@@ -238,13 +238,13 @@ CNode** CNode::choseCrossoverPart()
 {
 	CNode** pp_choosenPart = nullptr;
 
+	int choosenChildrenIndex = UsefullMethods::ifOccur(50) ? 0 : 1;
 	switch (nodeOperOrVar.at(0))
 	{
 	case PLUS:
 	case MINUS:
 	case MULTIPLICATION:
 	case DIVISION:
-		int choosenChildrenIndex = UsefullMethods::ifOccur(50) ? 0 : 1;
 		if (v_children.at(choosenChildrenIndex)->nodeType != OPERATORTYPE)
 			pp_choosenPart = &(v_children.at(choosenChildrenIndex));
 		else

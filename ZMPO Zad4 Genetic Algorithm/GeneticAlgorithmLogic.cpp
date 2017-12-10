@@ -65,6 +65,7 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 	}
 
 
+/*
 
 	for (int k = 0; k < 10; k++)
 	{
@@ -86,6 +87,7 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 		stopDebugger = 42; //toTest
 
 	}
+*/
 
 
 	stopDebugger = 42; //toTest
@@ -93,7 +95,15 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 
 
 
+	for (size_t i = 0; i < POPULATIONSIZE; i+=2)
+	{
+		
+		v_population.at(i)->crossover(v_population.at(i + 1));
+		v_population.at(i)->refreshExpressionStringToTest();
+		v_population.at(i+1)->refreshExpressionStringToTest();
 
+		
+	}
 
 
 

@@ -9,7 +9,7 @@
 #include "CNode.h"
 #include "CTree.h"
 
-#define POPULATIONSIZE 100
+#define POPULATIONSIZE 4
 
 #define CHANCEOFTREEMUTATION 20
 #define CHANCEOFNODEMUTATION 10
