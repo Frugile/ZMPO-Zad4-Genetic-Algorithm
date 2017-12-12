@@ -215,7 +215,7 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 
 		sortPopulationByQuality(); //toTest
 
-		int stopDebugger = 8; //toTest 
+		int stopDebugger = 88; //toTest 
 		saveDateToFile(FILENAMERESULT, v_population.at(0)->expressionStringToTest);
 	}
 
