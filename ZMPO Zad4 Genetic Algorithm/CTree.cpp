@@ -55,14 +55,14 @@ void CTree::refreshExpressionStringToTest()
 }
 
 
-void CTree::crossover(CTree* secondTree)
+void CTree::crossover(CTree* secondTree, int chanceOfNodeCrossover)
 {
 	CNode** pp_thisTreePart = nullptr;
 	CNode** pp_secondTreePart = nullptr; //może nie bedzie potrzebne
 
 	//chose thisTree node
 
-	if(p_root->nodeType != OPERATORTYPE)
+	if(p_root->nodeType != OPERATORTYPE || UsefullMethods::ifOccur(chanceOfNodeCrossover))
 		pp_thisTreePart = &p_root;
 	else
 	{
@@ -73,10 +73,10 @@ void CTree::crossover(CTree* secondTree)
 		case MINUS:
 		case MULTIPLICATION:
 		case DIVISION:
-			if (p_root->v_children.at(choosenChildrenIndex)->nodeType != OPERATORTYPE)
+			if (p_root->v_children.at(choosenChildrenIndex)->nodeType != OPERATORTYPE || UsefullMethods::ifOccur(chanceOfNodeCrossover))
 				pp_thisTreePart = &(p_root->v_children.at(choosenChildrenIndex));
 			else
-				pp_thisTreePart = p_root->v_children.at(choosenChildrenIndex)->choseCrossoverPart();
+				pp_thisTreePart = p_root->v_children.at(choosenChildrenIndex)->choseCrossoverPart(chanceOfNodeCrossover, 0,  MAXDEPTH);
 			/*if (UsefullMethods::ifOccur(50))
 			{
 				if (p_root->v_children.at(0)->nodeType != OPERATORTYPE)
@@ -94,10 +94,10 @@ void CTree::crossover(CTree* secondTree)
 			break;
 		case SIN[0]:
 		case COS[0]:
-			if (p_root->v_children.at(0)->nodeType != OPERATORTYPE)
+			if (p_root->v_children.at(0)->nodeType != OPERATORTYPE || UsefullMethods::ifOccur(chanceOfNodeCrossover))
 				pp_thisTreePart = &(p_root->v_children.at(0));
 			else
-				pp_thisTreePart = p_root->v_children.at(0)->choseCrossoverPart();
+				pp_thisTreePart = p_root->v_children.at(0)->choseCrossoverPart(chanceOfNodeCrossover, 0, MAXDEPTH);
 			break;
 		default:
 			cout << "Error7"; //toTest
@@ -110,42 +110,43 @@ void CTree::crossover(CTree* secondTree)
 
 	//choose secondTree node //chwilowe roziwązanie
 
-	if (secondTree->p_root->nodeType != OPERATORTYPE)
+	int heightOfFirstSubtree = (*pp_thisTreePart)->depth;
+	int maxHeightOfSecondSubtree = (MAXDEPTH - (*pp_thisTreePart)->depth);
+
+//	int height = secondTree->p_root->getHeight(); //toTest
+	bool ifFirstSubtreeFitsEnd = (MAXDEPTH - secondTree->p_root->depth == heightOfFirstSubtree);
+	bool ifSecondSubtreeFits = (secondTree->p_root->getHeight() <= maxHeightOfSecondSubtree);
+
+
+	if (secondTree->p_root->nodeType != OPERATORTYPE || UsefullMethods::ifOccur(chanceOfNodeCrossover) ^ ifSecondSubtreeFits || ifFirstSubtreeFitsEnd)
 		pp_secondTreePart = &(secondTree->p_root);
 	else
 	{
 		int choosenChildrenIndex = UsefullMethods::ifOccur(50) ? 0 : 1;
+
 		switch (secondTree->p_root->nodeOperOrVar.at(0))
 		{
 		case PLUS:
 		case MINUS:
 		case MULTIPLICATION:
 		case DIVISION:
-			if (secondTree->p_root->v_children.at(choosenChildrenIndex)->nodeType != OPERATORTYPE)
+			ifFirstSubtreeFitsEnd = (MAXDEPTH - secondTree->p_root->v_children.at(choosenChildrenIndex)->depth == heightOfFirstSubtree);
+			ifSecondSubtreeFits = (secondTree->p_root->v_children.at(choosenChildrenIndex)->getHeight() <= maxHeightOfSecondSubtree);
+//			height = secondTree->p_root->v_children.at(choosenChildrenIndex)->getHeight();
+			if (secondTree->p_root->v_children.at(choosenChildrenIndex)->nodeType != OPERATORTYPE || (UsefullMethods::ifOccur(chanceOfNodeCrossover) ^ ifSecondSubtreeFits) || ifFirstSubtreeFitsEnd)
 				pp_secondTreePart = &(secondTree->p_root->v_children.at(choosenChildrenIndex));
 			else
-				pp_secondTreePart = secondTree->p_root->v_children.at(choosenChildrenIndex)->choseCrossoverPart();
-			/*if (UsefullMethods::ifOccur(50))
-			{
-			if (p_root->v_children.at(0)->nodeType != OPERATORTYPE)
-			pp_thisTreePart = &(p_root->v_children.at(0));
-			else
-			pp_thisTreePart = p_root->v_children.at(0)->choseCrossoverPart();
-			}
-			else
-			{
-			if (p_root->v_children.at(1)->nodeType != OPERATORTYPE)
-			pp_thisTreePart = &(p_root->v_children.at(1));
-			else
-			pp_thisTreePart = p_root->v_children.at(1)->choseCrossoverPart();
-			}				*/
+				pp_secondTreePart = secondTree->p_root->v_children.at(choosenChildrenIndex)->choseCrossoverPart(chanceOfNodeCrossover, heightOfFirstSubtree, maxHeightOfSecondSubtree);
+			
 			break;
 		case SIN[0]:
 		case COS[0]:
-			if (secondTree->p_root->v_children.at(0)->nodeType != OPERATORTYPE)
+			ifFirstSubtreeFitsEnd = (MAXDEPTH - secondTree->p_root->v_children.at(0)->depth == heightOfFirstSubtree);
+			ifSecondSubtreeFits = (secondTree->p_root->v_children.at(0)->getHeight() <= maxHeightOfSecondSubtree);
+			if (secondTree->p_root->v_children.at(0)->nodeType != OPERATORTYPE || (UsefullMethods::ifOccur(chanceOfNodeCrossover) ^ ifSecondSubtreeFits) || ifFirstSubtreeFitsEnd)
 				pp_secondTreePart = &(secondTree->p_root->v_children.at(0));
 			else
-				pp_secondTreePart = secondTree->p_root->v_children.at(0)->choseCrossoverPart();
+				pp_secondTreePart = secondTree->p_root->v_children.at(0)->choseCrossoverPart(chanceOfNodeCrossover, heightOfFirstSubtree, maxHeightOfSecondSubtree);
 			break;
 		default:
 			cout << "Error7"; //toTest
@@ -165,11 +166,16 @@ void CTree::crossover(CTree* secondTree)
 
 
 	//recalculate depths
-
-
-
+	p_root->recalculateDeph(0);
+	secondTree->p_root->recalculateDeph(0);
 
 	//TODO: 
 	//- make it "deph safe" - so it wont make trees that exceed max deph
 }
 
+void CTree::crossoverNEW(CTree* secondTree, int chanceOfNodeCrossover)
+{
+	
+
+
+}

@@ -72,11 +72,11 @@ void CNode::randomThisNode(int depth)
 	}
 }
 
-void CNode::mutation(int chanceOfMutation)
+void CNode::mutation(int chanceOfNodeMutation)
 {
 	if(nodeType == OPERATORTYPE)
 	{
-		if (UsefullMethods::ifOccur(chanceOfMutation)) 
+		if (UsefullMethods::ifOccur(chanceOfNodeMutation)) 
 		{
 			nodeOperOrVar = "";
 			deleteChildren();
@@ -92,13 +92,13 @@ void CNode::mutation(int chanceOfMutation)
 			case MULTIPLICATION:
 			case DIVISION:
 				if (UsefullMethods::ifOccur(50))
-					v_children.at(0)->mutation(chanceOfMutation);
+					v_children.at(0)->mutation(chanceOfNodeMutation);
 				else
-					v_children.at(1)->mutation(chanceOfMutation);
+					v_children.at(1)->mutation(chanceOfNodeMutation);
 				break;
 			case SIN[0]:
 			case COS[0]:
-				v_children.at(0)->mutation(chanceOfMutation);
+				v_children.at(0)->mutation(chanceOfNodeMutation);
 				break;
 			default:
 				cout << "Error6"; //toTest
@@ -137,10 +137,10 @@ string CNode::randomOper()
 		oper = DIVISION;
 		break;
 	case 5:
-		oper = SIN;
+		oper = PLUS; //SIN toTest
 		break;
 	case 6:
-		oper = COS;
+		oper = PLUS; //COS toTest
 		break;
 	default:
 		cout << "Error2"; //toTest
@@ -234,30 +234,35 @@ double CNode::getValue(vector<double*>* pv_varsValues, int variablesIndexes[])
 	return value;
 }
 
-CNode** CNode::choseCrossoverPart()
+CNode** CNode::choseCrossoverPart(int chanceOfNodeCrossover, int heightOfFirstSubtree, int maxHeightOfSecondSubtree)
 {
 	CNode** pp_choosenPart = nullptr;
 
 	int choosenChildrenIndex = UsefullMethods::ifOccur(50) ? 0 : 1;
+	bool ifFirstSubtreeFitsEnd;
+	bool ifSecondSubtreeFits;
 	switch (nodeOperOrVar.at(0))
 	{
 	case PLUS:
 	case MINUS:
 	case MULTIPLICATION:
 	case DIVISION:
-		if (v_children.at(choosenChildrenIndex)->nodeType != OPERATORTYPE)
+		ifFirstSubtreeFitsEnd = (MAXDEPTH - v_children.at(choosenChildrenIndex)->depth == heightOfFirstSubtree);
+
+		ifSecondSubtreeFits = (v_children.at(choosenChildrenIndex)->getHeight() <= maxHeightOfSecondSubtree);
+		if (v_children.at(choosenChildrenIndex)->nodeType != OPERATORTYPE || (UsefullMethods::ifOccur(chanceOfNodeCrossover) ^ ifSecondSubtreeFits) || ifFirstSubtreeFitsEnd)
 			pp_choosenPart = &(v_children.at(choosenChildrenIndex));
 		else
-			pp_choosenPart = v_children.at(choosenChildrenIndex)->choseCrossoverPart();
-
+			pp_choosenPart = v_children.at(choosenChildrenIndex)->choseCrossoverPart(chanceOfNodeCrossover, heightOfFirstSubtree, maxHeightOfSecondSubtree);
 		break;
 	case SIN[0]:
 	case COS[0]:
-
-		if (v_children.at(0)->nodeType != OPERATORTYPE)
+		ifFirstSubtreeFitsEnd = (MAXDEPTH - v_children.at(0)->depth == heightOfFirstSubtree);
+		ifSecondSubtreeFits = (v_children.at(0)->getHeight() <= maxHeightOfSecondSubtree);
+		if (v_children.at(0)->nodeType != OPERATORTYPE || (UsefullMethods::ifOccur(chanceOfNodeCrossover) ^ ifSecondSubtreeFits) || ifFirstSubtreeFitsEnd)
 			pp_choosenPart = &(v_children.at(0));
 		else
-			pp_choosenPart = v_children.at(0)->choseCrossoverPart();
+			pp_choosenPart = v_children.at(0)->choseCrossoverPart(chanceOfNodeCrossover, heightOfFirstSubtree, maxHeightOfSecondSubtree);
 
 		break;
 	default:
@@ -265,4 +270,68 @@ CNode** CNode::choseCrossoverPart()
 	}
 
 	return pp_choosenPart;
+}
+
+CNode** CNode::choseCrossoverPartNEW(int chanceOfNodeCrossover, int heightOfFirstSubtree, int maxHeightOfSecondSubtree)
+{
+
+
+
+	return nullptr;
+}
+
+
+void CNode::recalculateDeph(int depth)
+{
+	this->depth = depth;
+
+	if(nodeType == 'o')
+	{
+		switch (nodeOperOrVar.at(0))
+		{
+		case PLUS:
+		case MINUS:
+		case MULTIPLICATION:
+		case DIVISION:
+			v_children.at(0)->recalculateDeph(depth + 1);
+			v_children.at(1)->recalculateDeph(depth + 1);
+			break;
+		case SIN[0]:
+		case COS[0]:
+			v_children.at(0)->recalculateDeph(depth + 1);
+			break;
+		default:
+			cout << "Error10"; //toTest
+		}
+	}
+
+}
+
+int CNode::getHeight()
+{
+	int height = 0;
+
+	if (nodeType == 'o')
+	{
+		int firstChildHeight;
+		int secondChildHeight;
+		switch (nodeOperOrVar.at(0))
+		{
+		case PLUS:
+		case MINUS:
+		case MULTIPLICATION:
+		case DIVISION:
+			firstChildHeight = v_children.at(0)->getHeight() + 1;
+			secondChildHeight = v_children.at(1)->getHeight() + 1;;
+			height = (firstChildHeight > secondChildHeight) ? firstChildHeight : secondChildHeight;
+			break;
+		case SIN[0]:
+		case COS[0]:
+			height = v_children.at(0)->getHeight() + 1;
+			break;
+		default:
+			cout << "Error11"; //toTest
+		}
+	}
+	return height;
 }

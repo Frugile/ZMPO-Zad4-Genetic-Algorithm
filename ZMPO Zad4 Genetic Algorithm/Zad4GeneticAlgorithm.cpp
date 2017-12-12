@@ -24,7 +24,7 @@ int main()
 	cout << WELCOME;;
 
 	GeneticAlgorithmLogic* p_geneticAlgorithm = new GeneticAlgorithmLogic();
-	p_geneticAlgorithm->runGeneticAlgorithm();
+	p_geneticAlgorithm->runGeneticAlgorithmTest();
 
 
 
@@ -46,11 +46,12 @@ int main()
 
 /*
 TODO:
-- tablica dynamiczna populacji
-- wylicznie jakoœci drzewa
-- mutowanie
-- turnieje
-- krzy¿owanie
+- tablica dynamiczna populacji -/
+- wylicznie jakoœci drzewa -/
+- mutowanie -/
+- turnieje -/
+- krzy¿owanie ~
 - inne rzeczy
+- ew. przerobiæ krzy¿ownaie tak, ¿eby wywo³ywaæ je od razu na root, bez du¿ego kodu w CTree
 
 */

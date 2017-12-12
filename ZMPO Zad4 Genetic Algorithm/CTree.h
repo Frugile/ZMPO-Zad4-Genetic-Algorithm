@@ -16,7 +16,8 @@ public:
 //	bool compCTreeByQuality(CTree* firstTree, CTree* secondTree);
 	void mutation(int chanceOfMutation);
 	void refreshExpressionStringToTest(); //toTest
-	void crossover(CTree* secondTree);
+	void crossover(CTree* secondTree, int chanceOfNodeCrossover);
+	void crossoverNEW(CTree* secondTree, int chanceOfNodeCrossover);
 
 private:
 	double quality;

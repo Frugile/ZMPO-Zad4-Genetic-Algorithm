@@ -28,7 +28,7 @@ void GeneticAlgorithmLogic::sortPopulationByQuality()
 	sort(v_population.begin(), v_population.end(), [](CTree* firstTree, CTree* secondTree){return firstTree->getQuality() < secondTree->getQuality();}); //lambda
 }
 
-void GeneticAlgorithmLogic::runGeneticAlgorithm()
+void GeneticAlgorithmLogic::runGeneticAlgorithmTest()
 {
 
 	v_population.reserve(POPULATIONSIZE);
@@ -46,7 +46,7 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 
 	int stopDebugger = 42; //toTest
 
-	sortPopulationByQuality();
+	sortPopulationByQuality(); //toTest
 	//sort(v_population.begin(), v_population.end(), compCTreeByQuality);
 
 	stopDebugger = 42; //toTest
@@ -67,7 +67,7 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 
 
 
-	for (int k = 0; k < 10; k++)
+	for (int k = 0; k < 3; k++)
 	{
 		vector<CTree*> v_selectedPopulation;
 		v_selectedPopulation.reserve(POPULATIONSIZE);
@@ -94,27 +94,39 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 
 
 
-
-	for (size_t i = 0; i < POPULATIONSIZE; i+=2)
+	for (int k = 0; k < 100; k++)
 	{
-		
-		v_population.at(i)->crossover(v_population.at(i + 1));
-		v_population.at(i)->refreshExpressionStringToTest();
-		v_population.at(i+1)->refreshExpressionStringToTest();
 
-		
+		for (size_t i = 0; i < POPULATIONSIZE; i += 2)
+		{
+
+			v_population.at(i)->crossover(v_population.at(i + 1), CHANCEOFNODECROSSOVER);
+
+			v_population.at(i)->refreshExpressionStringToTest();
+			v_population.at(i + 1)->refreshExpressionStringToTest();
+			v_population.at(i)->recalculateQuality(pv_dateFromFile);
+			v_population.at(i + 1)->recalculateQuality(pv_dateFromFile);
+
+		}
+		sortPopulationByQuality(); //toTest
+		stopDebugger = 76; //toTest yea GIT :D
+
 	}
 
 
 
 
 
-	stopDebugger = 76; //toTest yea GIT :D
+	stopDebugger = 76; //toTest 
 
 
 
 
 
+}
+
+void GeneticAlgorithmLogic::runGeneticAlgorithm()
+{
 }
 
 vector<double*>* GeneticAlgorithmLogic::readDateFromFile(string fileName)

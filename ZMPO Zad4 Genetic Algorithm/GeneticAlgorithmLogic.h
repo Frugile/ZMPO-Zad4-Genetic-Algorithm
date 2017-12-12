@@ -9,7 +9,7 @@
 #include "CNode.h"
 #include "CTree.h"
 
-#define POPULATIONSIZE 50
+#define POPULATIONSIZE 4
 
 #define CHANCEOFTREEMUTATION 20
 #define CHANCEOFNODEMUTATION 10
@@ -19,8 +19,8 @@
 
 
 //#define FILENAME "C:\\Users\\Frugile\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\x.txt"
-//#define FILENAME "C:\\Users\\Frugile\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\xy_pl_xx.txt" //PC
-#define FILENAME "C:\\Users\\najle\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\xy_pl_xx.txt" //Surface
+#define FILENAME "C:\\Users\\Frugile\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\xy_pl_xx.txt" //PC
+//#define FILENAME "C:\\Users\\najle\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\xy_pl_xx.txt" //Surface
 
 
 #define new new(_NORMAL_BLOCK, __FILE__, __LINE__) //to check Memory Leaks
@@ -34,6 +34,7 @@ public:
 	void deletePopulation();
 	~GeneticAlgorithmLogic();
 	void sortPopulationByQuality();
+	void runGeneticAlgorithmTest();
 	void runGeneticAlgorithm();
 private:
 	vector<CTree*> v_population; 

@@ -6,8 +6,8 @@
 #include "UsefullMethods.h"
 
 #define MAXDEPTH 3
-#define CHANCEOFOPERATOR 60
-#define CHANCEOFNUMBER 20
+#define CHANCEOFOPERATOR 80
+#define CHANCEOFNUMBER 10
 #define MAXRANDOMNUMBER 90
 
 #define NUMBERTYPE 'n'
@@ -41,10 +41,13 @@ public:
 	~CNode();
 	CNode(CNode &secondNode);
 	void randomThisNode(int depth);
-	void mutation(int chanceOfMutation);
+	void mutation(int chanceOfNodeMutation);
 	string toString();
 	double getValue(vector<double*>* pv_varsValues, int variablesIndexes[]);
-	CNode** choseCrossoverPart();
+	CNode** choseCrossoverPart(int chanceOfNodeCrossover, int dephOfFirstSubtree, int maxDepthOfSubtree);
+	CNode** choseCrossoverPartNEW(int chanceOfNodeCrossover, int heightOfFirstSubtree, int maxHeightOfSecondSubtree);
+	void recalculateDeph(int depth);
+	int getHeight();
 	//	double getValue(vector<double*>* pv_varsValues);
 
 
