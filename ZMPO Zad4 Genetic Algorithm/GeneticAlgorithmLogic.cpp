@@ -65,7 +65,7 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 	}
 
 
-/*
+
 
 	for (int k = 0; k < 10; k++)
 	{
@@ -87,7 +87,7 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 		stopDebugger = 42; //toTest
 
 	}
-*/
+
 
 
 	stopDebugger = 42; //toTest
@@ -109,7 +109,7 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 
 
 
-	stopDebugger = 77; //toTest yea GIT :D
+	stopDebugger = 76; //toTest yea GIT :D
 
 
 
