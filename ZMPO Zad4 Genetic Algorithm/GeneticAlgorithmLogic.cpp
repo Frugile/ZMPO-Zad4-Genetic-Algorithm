@@ -102,10 +102,10 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 		v_population.at(i)->refreshExpressionStringToTest();
 		v_population.at(i+1)->refreshExpressionStringToTest();
 
+		
 	}
 
 
-	sortPopulationByQuality();
 
 
 
