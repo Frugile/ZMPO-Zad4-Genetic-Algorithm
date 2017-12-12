@@ -16,12 +16,12 @@ public:
 //	bool compCTreeByQuality(CTree* firstTree, CTree* secondTree);
 	void mutation(int chanceOfMutation);
 	void refreshExpressionStringToTest(); //toTest
-	void crossover(CTree* secondTree, int chanceOfNodeCrossover);
-	void crossoverNEW(CTree* secondTree, int chanceOfNodeCrossover);
+//	void crossover(CTree* secondTree, int chanceOfNodeCrossover);
+//	void crossoverNEW(CTree* secondTree, int chanceOfNodeCrossover);
 	void crossoverNEWNEW(CTree* secondTree, int chanceOfNodeCrossover);
+	string expressionStringToTest; //toTest
 
 private:
 	double quality;
-	string expressionStringToTest; //toTest
 	CNode *p_root;
 };

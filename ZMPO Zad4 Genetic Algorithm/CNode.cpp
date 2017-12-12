@@ -138,10 +138,10 @@ string CNode::randomOper()
 		oper = DIVISION;
 		break;
 	case 5:
-		oper = PLUS; //SIN toTest
+		oper = SIN;
 		break;
 	case 6:
-		oper = PLUS; //COS toTest
+		oper = COS;
 		break;
 	default:
 		cout << "Error2"; //toTest
@@ -235,7 +235,7 @@ double CNode::getValue(vector<double*>* pv_varsValues, int variablesIndexes[])
 	return value;
 }
 
-CNode** CNode::choseCrossoverPart(int chanceOfNodeCrossover, int heightOfFirstSubtree, int maxHeightOfSecondSubtree)
+/*CNode** CNode::choseCrossoverPart(int chanceOfNodeCrossover, int heightOfFirstSubtree, int maxHeightOfSecondSubtree)
 {
 	CNode** pp_choosenPart = nullptr;
 
@@ -310,6 +310,7 @@ CNode** CNode::choseCrossoverPartNEW(CNode** pp_choosenPart, int chanceOfNodeCro
 	}
 	return pp_choosenPart;
 }
+*/
 
 CNode** CNode::choseCrossoverPartNEWNEW(int chanceOfNodeCrossover, int heightOfFirstSubtree, int maxHeightOfSecondSubtree)
 {
@@ -354,8 +355,6 @@ CNode** CNode::choseCrossoverPartNEWNEW(int chanceOfNodeCrossover, int heightOfF
 
 	return pp_choosenPart;
 }
-
-
 
 void CNode::recalculateDeph(int depth)
 {

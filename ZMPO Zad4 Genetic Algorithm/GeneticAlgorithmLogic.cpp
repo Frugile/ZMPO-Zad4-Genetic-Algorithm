@@ -161,8 +161,8 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 			v_selectedPopulation.reserve(POPULATIONSIZE);
 			for (size_t i = 0; i < POPULATIONSIZE; i++)
 			{
-				int firstTreeIndex = UsefullMethods::randomNumber(POPULATIONSIZE) - 1;
-				int secondTreeIndex = UsefullMethods::randomNumber(POPULATIONSIZE) - 1;
+				int firstTreeIndex = UsefullMethods::randomNumberCloserToZero(POPULATIONSIZE) - 1;
+				int secondTreeIndex = UsefullMethods::randomNumberCloserToZero(POPULATIONSIZE) - 1;
 				if (v_population.at(firstTreeIndex)->getQuality() < v_population.at(secondTreeIndex)->getQuality())
 					v_selectedPopulation.push_back(new CTree(*v_population.at(firstTreeIndex)));
 				else
@@ -179,10 +179,10 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 				if (UsefullMethods::ifOccur(CHANCEOFTREECROSSOVER))
 				{
 					v_population.at(i)->crossoverNEWNEW(v_population.at(i + 1), CHANCEOFNODECROSSOVER);
-					v_population.at(i)->refreshExpressionStringToTest();
-					v_population.at(i + 1)->refreshExpressionStringToTest();
-					v_population.at(i)->recalculateQuality(pv_dateFromFile);
-					v_population.at(i + 1)->recalculateQuality(pv_dateFromFile);
+//					v_population.at(i)->refreshExpressionStringToTest();
+//					v_population.at(i + 1)->refreshExpressionStringToTest();
+//					v_population.at(i)->recalculateQuality(pv_dateFromFile);
+//					v_population.at(i + 1)->recalculateQuality(pv_dateFromFile);
 				}
 			}
 
@@ -193,7 +193,7 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 				if (UsefullMethods::ifOccur(CHANCEOFTREEMUTATION))
 				{
 					v_population.at(i)->mutation(CHANCEOFNODEMUTATION);
-					v_population.at(i)->refreshExpressionStringToTest();
+//					v_population.at(i)->refreshExpressionStringToTest();
 				}
 			}
 
@@ -205,10 +205,18 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 			sortPopulationByQuality(); //toTest
 			bestQualityTillNow = (v_population.at(0)->getQuality() < bestQualityTillNow) ? v_population.at(0)->getQuality() : bestQualityTillNow;//toTest
 
+		}		//for (int repeat = 0; repeat < x; repeat++)
+
+
+		for (size_t i = 0; i < POPULATIONSIZE; i++)
+		{
+			v_population.at(i)->refreshExpressionStringToTest();
 		}
+
 		sortPopulationByQuality(); //toTest
 
 		int stopDebugger = 8; //toTest 
+		saveDateToFile(FILENAMERESULT, v_population.at(0)->expressionStringToTest);
 	}
 
 }
@@ -240,9 +248,26 @@ vector<double*>* GeneticAlgorithmLogic::readDateFromFile(string fileName)
 //			}
 		} while (file.good());
 	}
-	
+	file.close();
 	return pv_dateFromFile;
 }
+
+void GeneticAlgorithmLogic::saveDateToFile(string fileName, string strintgToSave)
+{
+	ofstream file;
+	file.open(fileName);
+
+	if (!file.good())
+	{
+		cout << "Error5"; //toTest
+	}
+	else
+	{
+		file << "Function: " << strintgToSave;
+	}
+	file.close();
+}
+
 
 //bool GeneticAlgorithmLogic::compCTreeByQuality(CTree* firstTree, CTree* secondTree) //nie działa, użyłem labdy :p
 //{

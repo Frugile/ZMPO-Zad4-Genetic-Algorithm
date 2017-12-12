@@ -21,18 +21,7 @@ using namespace std;
 
 int main()
 {
-	cout << WELCOME;;
-
-	for (int i = 0; i < 200; ++i)
-	{
-		cout << UsefullMethods::randomNumberCloserToZero(100) << endl; //toTest
-	}
-	
-
-
-
-
-
+//	cout << WELCOME;;
 
 
 	GeneticAlgorithmLogic* p_geneticAlgorithm = new GeneticAlgorithmLogic();
