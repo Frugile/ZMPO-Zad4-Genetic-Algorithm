@@ -9,10 +9,10 @@
 #include "CNode.h"
 #include "CTree.h"
 
-#define POPULATIONSIZE 1000
+#define POPULATIONSIZE 3000
 
-#define CHANCEOFTREEMUTATION 60
-#define CHANCEOFNODEMUTATION 70
+#define CHANCEOFTREEMUTATION 30
+#define CHANCEOFNODEMUTATION 30
 
 #define CHANCEOFTREECROSSOVER 50
 #define CHANCEOFNODECROSSOVER 40
@@ -20,8 +20,6 @@
 
 //#define FILENAME "C:\\Users\\Frugile\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\x.txt"
 #define FILENAME "C:\\Users\\Frugile\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\xy_pl_xx.txt" //PC
-#define FILENAMERESULT "C:\\Users\\Frugile\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\result.txt" //PC
-
 //#define FILENAME "C:\\Users\\najle\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\xy_pl_xx.txt" //Surface
 
 
@@ -42,6 +40,5 @@ private:
 	vector<CTree*> v_population; 
 	vector<double*>* pv_dateFromFile;
 	vector<double*>* readDateFromFile(string fileName);
-	void saveDateToFile(string fileName, string strintgToSave);
-	//	bool compCTreeByQuality(CTree* firstTree, CTree* secondTree); //nie działa, użyłem labdy
+//	bool compCTreeByQuality(CTree* firstTree, CTree* secondTree); //nie działa, użyłem labdy
 };

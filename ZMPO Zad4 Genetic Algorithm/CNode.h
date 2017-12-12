@@ -5,7 +5,7 @@
 #include <sstream>
 #include "UsefullMethods.h"
 
-#define MAXDEPTH 6
+#define MAXDEPTH 4
 #define CHANCEOFOPERATOR 20
 #define CHANCEOFNUMBER 40
 #define MAXRANDOMNUMBER 90
@@ -44,8 +44,8 @@ public:
 	void mutation(int chanceOfNodeMutation);
 	string toString();
 	double getValue(vector<double*>* pv_varsValues, int variablesIndexes[]);
-//	CNode** choseCrossoverPart(int chanceOfNodeCrossover, int dephOfFirstSubtree, int maxDepthOfSubtree);
-//	CNode** choseCrossoverPartNEW(CNode** pp_choosenPart, int chanceOfNodeCrossover, int heightOfFirstSubtree, int maxHeightOfSecondSubtree);
+	CNode** choseCrossoverPart(int chanceOfNodeCrossover, int dephOfFirstSubtree, int maxDepthOfSubtree);
+	CNode** choseCrossoverPartNEW(CNode** pp_choosenPart, int chanceOfNodeCrossover, int heightOfFirstSubtree, int maxHeightOfSecondSubtree);
 	CNode** choseCrossoverPartNEWNEW(int chanceOfNodeCrossover, int heightOfFirstSubtree, int maxHeightOfSecondSubtree);
 	void recalculateDeph(int depth);
 	int recalculateHeight();

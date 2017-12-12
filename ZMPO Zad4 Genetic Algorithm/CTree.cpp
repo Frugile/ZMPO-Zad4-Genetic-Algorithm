@@ -57,7 +57,6 @@ void CTree::refreshExpressionStringToTest()
 	expressionStringToTest = p_root->toString();
 }
 
-/*
 
 void CTree::crossover(CTree* secondTree, int chanceOfNodeCrossover)
 {
@@ -94,7 +93,7 @@ void CTree::crossover(CTree* secondTree, int chanceOfNodeCrossover)
 					pp_thisTreePart = &(p_root->v_children.at(1));
 				else
 					pp_thisTreePart = p_root->v_children.at(1)->choseCrossoverPart();
-			}				#1#
+			}				*/
 			break;
 		case SIN[0]:
 		case COS[0]:
@@ -192,7 +191,7 @@ void CTree::crossoverNEW(CTree* secondTree, int chanceOfNodeCrossover)
 	int maxHeightOfSecondSubtree = (MAXDEPTH - (*pp_thisTreePart)->depth);
 
 
-	/*pp_secondTreePart = #1#secondTree->p_root->choseCrossoverPartNEW(pp_secondTreePart, chanceOfNodeCrossover, heightOfFirstSubtree, maxHeightOfSecondSubtree);
+	/*pp_secondTreePart = */secondTree->p_root->choseCrossoverPartNEW(pp_secondTreePart, chanceOfNodeCrossover, heightOfFirstSubtree, maxHeightOfSecondSubtree);
 
 	CNode* p_temp = *pp_thisTreePart;
 	*pp_thisTreePart = *pp_secondTreePart;
@@ -204,7 +203,6 @@ void CTree::crossoverNEW(CTree* secondTree, int chanceOfNodeCrossover)
 	secondTree->p_root->recalculateHeight();
 
 }
-*/
 
 void CTree::crossoverNEWNEW(CTree* secondTree, int chanceOfNodeCrossover)
 {
