@@ -18,6 +18,7 @@ public:
 	void refreshExpressionStringToTest(); //toTest
 	void crossover(CTree* secondTree, int chanceOfNodeCrossover);
 	void crossoverNEW(CTree* secondTree, int chanceOfNodeCrossover);
+	void crossoverNEWNEW(CTree* secondTree, int chanceOfNodeCrossover);
 
 private:
 	double quality;

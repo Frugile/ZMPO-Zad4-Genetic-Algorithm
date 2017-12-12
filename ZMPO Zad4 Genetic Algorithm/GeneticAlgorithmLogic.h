@@ -9,13 +9,13 @@
 #include "CNode.h"
 #include "CTree.h"
 
-#define POPULATIONSIZE 4
+#define POPULATIONSIZE 3000
 
-#define CHANCEOFTREEMUTATION 20
-#define CHANCEOFNODEMUTATION 10
+#define CHANCEOFTREEMUTATION 30
+#define CHANCEOFNODEMUTATION 30
 
-#define CHANCEOFTREECROSSOVER 20
-#define CHANCEOFNODECROSSOVER 10
+#define CHANCEOFTREECROSSOVER 50
+#define CHANCEOFNODECROSSOVER 40
 
 
 //#define FILENAME "C:\\Users\\Frugile\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\x.txt"

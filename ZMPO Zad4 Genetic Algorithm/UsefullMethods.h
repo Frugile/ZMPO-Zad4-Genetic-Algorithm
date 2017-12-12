@@ -10,5 +10,6 @@ class UsefullMethods
 {
 public:
 	static int randomNumber(int bound);
+	static int randomNumberCloserToZero(int bound);
 	static bool ifOccur(int chance);
 };
