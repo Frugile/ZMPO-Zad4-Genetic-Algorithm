@@ -235,84 +235,8 @@ double CNode::getValue(vector<double*>* pv_varsValues, int variablesIndexes[])
 	return value;
 }
 
-/*CNode** CNode::choseCrossoverPart(int chanceOfNodeCrossover, int heightOfFirstSubtree, int maxHeightOfSecondSubtree)
-{
-	CNode** pp_choosenPart = nullptr;
 
-	int choosenChildrenIndex = UsefullMethods::ifOccur(50) ? 0 : 1;
-	bool ifFirstSubtreeFitsEnd;
-	bool ifSecondSubtreeFits;
-	switch (nodeOperOrVar.at(0))
-	{
-	case PLUS:
-	case MINUS:
-	case MULTIPLICATION:
-	case DIVISION:
-		ifFirstSubtreeFitsEnd = (MAXDEPTH - v_children.at(choosenChildrenIndex)->depth == heightOfFirstSubtree);
-
-		ifSecondSubtreeFits = (v_children.at(choosenChildrenIndex)->getHeight() <= maxHeightOfSecondSubtree);
-		if (v_children.at(choosenChildrenIndex)->nodeType != OPERATORTYPE || (UsefullMethods::ifOccur(chanceOfNodeCrossover) && ifSecondSubtreeFits) || ifFirstSubtreeFitsEnd)
-			pp_choosenPart = &(v_children.at(choosenChildrenIndex));
-		else
-			pp_choosenPart = v_children.at(choosenChildrenIndex)->choseCrossoverPart(chanceOfNodeCrossover, heightOfFirstSubtree, maxHeightOfSecondSubtree);
-		break;
-	case SIN[0]:
-	case COS[0]:
-		ifFirstSubtreeFitsEnd = (MAXDEPTH - v_children.at(0)->depth == heightOfFirstSubtree);
-		ifSecondSubtreeFits = (v_children.at(0)->getHeight() <= maxHeightOfSecondSubtree);
-		if (v_children.at(0)->nodeType != OPERATORTYPE || (UsefullMethods::ifOccur(chanceOfNodeCrossover) && ifSecondSubtreeFits) || ifFirstSubtreeFitsEnd)
-			pp_choosenPart = &(v_children.at(0));
-		else
-			pp_choosenPart = v_children.at(0)->choseCrossoverPart(chanceOfNodeCrossover, heightOfFirstSubtree, maxHeightOfSecondSubtree);
-
-		break;
-	default:
-		cout << "Error8"; //toTest
-	}
-
-	return pp_choosenPart;
-}
-
-CNode** CNode::choseCrossoverPartNEW(CNode** pp_choosenPart, int chanceOfNodeCrossover, int heightOfFirstSubtree, int maxHeightOfSecondSubtree)
-{
-
-	// wartości 0 i maxdepth dla pierwszego
-
-	if (nodeType != OPERATORTYPE)
-	{
-		*pp_choosenPart = this;
-	}
-	else if (heightOfFirstSubtree == MAXDEPTH - depth)
-	{
-		*pp_choosenPart = this;
-	}
-	else if (height <= maxHeightOfSecondSubtree ^ UsefullMethods::ifOccur(chanceOfNodeCrossover))
-	{
-		*pp_choosenPart = this;
-	}
-	else
-	{
-		int choosenChildrenIndex = UsefullMethods::ifOccur(50) ? 0 : 1;
-		switch (nodeOperOrVar.at(0))
-		{
-		case SIN[0]:
-		case COS[0]:
-			choosenChildrenIndex = 0;
-		case PLUS:
-		case MINUS:
-		case MULTIPLICATION:
-		case DIVISION:
-			pp_choosenPart = v_children.at(choosenChildrenIndex)->choseCrossoverPartNEW(pp_choosenPart, chanceOfNodeCrossover, heightOfFirstSubtree, maxHeightOfSecondSubtree);
-			break;
-		default:
-			cout << "Error12"; //toTest
-		}
-	}
-	return pp_choosenPart;
-}
-*/
-
-CNode** CNode::choseCrossoverPartNEWNEW(int chanceOfNodeCrossover, int heightOfFirstSubtree, int maxHeightOfSecondSubtree)
+CNode** CNode::choseCrossoverPart(int chanceOfNodeCrossover, int heightOfFirstSubtree, int maxHeightOfSecondSubtree)
 {
 	CNode** pp_choosenPart = nullptr;
 
@@ -341,7 +265,7 @@ CNode** CNode::choseCrossoverPartNEWNEW(int chanceOfNodeCrossover, int heightOfF
 		}
 		else
 		{
-			pp_choosenPart = v_children.at(choosenChildrenIndex)->choseCrossoverPartNEWNEW(chanceOfNodeCrossover, heightOfFirstSubtree, maxHeightOfSecondSubtree);
+			pp_choosenPart = v_children.at(choosenChildrenIndex)->choseCrossoverPart(chanceOfNodeCrossover, heightOfFirstSubtree, maxHeightOfSecondSubtree);
 		}
 
 

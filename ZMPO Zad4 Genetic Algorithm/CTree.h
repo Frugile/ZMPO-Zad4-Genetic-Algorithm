@@ -2,7 +2,10 @@
 #include "CNode.h"
 using namespace std;
 
+#define NUMBEROFVARIABLES 2
+
 #define new new(_NORMAL_BLOCK, __FILE__, __LINE__) //to check Memory Leaks
+
 
 
 class CTree

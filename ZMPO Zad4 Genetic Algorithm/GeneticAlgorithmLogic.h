@@ -17,14 +17,15 @@
 #define CHANCEOFTREECROSSOVER 50
 #define CHANCEOFNODECROSSOVER 40
 
-#define DESIREDQUALITY 1.0
-
+#define DESIREDQUALITY 0.3
 
 //#define FILENAME "C:\\Users\\Frugile\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\x.txt"
-#define FILENAME "C:\\Users\\Frugile\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\xy_pl_xx.txt" //PC
-#define FILENAMERESULT "C:\\Users\\Frugile\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\result.txt" //PC
+//#define FILENAME "C:\\Users\\Frugile\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\xy_pl_xx.txt" //PC
+//#define FILENAMERESULT "C:\\Users\\Frugile\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\result.txt" //PC
 
-//#define FILENAME "C:\\Users\\najle\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\xy_pl_xx.txt" //Surface
+#define FILENAME "C:\\Users\\najle\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\xy_pl_xx.txt" //Surface
+#define FILENAMERESULT "C:\\Users\\najle\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\result.txt" //Surface
+
 
 
 #define new new(_NORMAL_BLOCK, __FILE__, __LINE__) //to check Memory Leaks

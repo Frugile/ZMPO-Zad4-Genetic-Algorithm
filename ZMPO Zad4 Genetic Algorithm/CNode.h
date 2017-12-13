@@ -27,6 +27,7 @@
 
 
 
+
 #define new new(_NORMAL_BLOCK, __FILE__, __LINE__) //to check Memory Leaks
 
 using namespace std;
@@ -44,9 +45,7 @@ public:
 	void mutation(int chanceOfNodeMutation);
 	string toString();
 	double getValue(vector<double*>* pv_varsValues, int variablesIndexes[]);
-//	CNode** choseCrossoverPart(int chanceOfNodeCrossover, int dephOfFirstSubtree, int maxDepthOfSubtree);
-//	CNode** choseCrossoverPartNEW(CNode** pp_choosenPart, int chanceOfNodeCrossover, int heightOfFirstSubtree, int maxHeightOfSecondSubtree);
-	CNode** choseCrossoverPartNEWNEW(int chanceOfNodeCrossover, int heightOfFirstSubtree, int maxHeightOfSecondSubtree);
+	CNode** choseCrossoverPart(int chanceOfNodeCrossover, int heightOfFirstSubtree, int maxHeightOfSecondSubtree);
 	void recalculateDeph(int depth);
 	int recalculateHeight();
 	int getHeight();

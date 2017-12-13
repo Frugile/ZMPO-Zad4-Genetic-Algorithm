@@ -24,11 +24,9 @@ int main()
 //	cout << WELCOME;;
 
 
-	GeneticAlgorithmLogic* p_geneticAlgorithm = new GeneticAlgorithmLogic();
-//	p_geneticAlgorithm->runGeneticAlgorithmTest();
-	p_geneticAlgorithm->runGeneticAlgorithm();
-
-	delete p_geneticAlgorithm;
+	GeneticAlgorithmLogic geneticAlgorithm;
+	geneticAlgorithm.runGeneticAlgorithm();
+	
 
 	_CrtDumpMemoryLeaks(); //to check Memory Leaks
 	cout << "Main END" << endl; //toTest

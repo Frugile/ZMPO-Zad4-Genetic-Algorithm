@@ -194,10 +194,18 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 			v_population.at(i)->recalculateQuality(pv_dateFromFile);
 		}
 
+		//
+
 		sortPopulationByQuality();
 		bestQualityTillNow = (v_population.at(0)->getQuality() < bestQualityTillNow) ? v_population.at(0)->getQuality() : bestQualityTillNow;
 
 	} while (bestQualityTillNow >= DESIREDQUALITY);
+
+
+	for (size_t i = 0; i < POPULATIONSIZE; i++)
+	{
+		v_population.at(i)->refreshExpressionStringToTest();
+	}
 
 	saveDateToFile(FILENAMERESULT, v_population.at(0)->expressionStringToTest);
 

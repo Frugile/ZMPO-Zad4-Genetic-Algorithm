@@ -23,15 +23,15 @@ void CTree::recalculateQuality(vector<double*>* pv_dateToCalculate)
 {
 	this->quality = 0;
 
-	int variablesIndexes[2];
+	int variablesIndexes[NUMBEROFVARIABLES];
 
-	int calculationNumer = pv_dateToCalculate->size() / 3;
+	int calculationNumer = pv_dateToCalculate->size() / NUMBEROFVARIABLES + 1;
 
 	for(int i = 0; i < calculationNumer; i++)
 	{
-		variablesIndexes[0] = i*3;
-		variablesIndexes[1] = 1 + i*3;
-		this->quality += pow(*(pv_dateToCalculate->at(2+ i*3)) - p_root->getValue(pv_dateToCalculate, variablesIndexes), 2);
+		variablesIndexes[0] = i*(NUMBEROFVARIABLES + 1);
+		variablesIndexes[1] = 1 + i*(NUMBEROFVARIABLES + 1);
+		this->quality += pow(*(pv_dateToCalculate->at(2+ i*(NUMBEROFVARIABLES + 1))) - p_root->getValue(pv_dateToCalculate, variablesIndexes), 2);
 	}
 }
 
@@ -98,7 +98,7 @@ void CTree::crossover(CTree* secondTree, int chanceOfNodeCrossover)
 			}
 			else
 			{
-				pp_thisTreePart = p_root->v_children.at(choosenChildrenIndex)->choseCrossoverPartNEWNEW(chanceOfNodeCrossover, heightOfFirstSubtree, maxHeightOfSecondSubtree);
+				pp_thisTreePart = p_root->v_children.at(choosenChildrenIndex)->choseCrossoverPart(chanceOfNodeCrossover, heightOfFirstSubtree, maxHeightOfSecondSubtree);
 			}
 
 //			pp_thisTreePart = p_root->v_children.at(choosenChildrenIndex)->choseCrossoverPartNEWNEW(chanceOfNodeCrossover, heightOfFirstSubtree, maxHeightOfSecondSubtree);
@@ -149,7 +149,7 @@ void CTree::crossover(CTree* secondTree, int chanceOfNodeCrossover)
 			}
 			else
 			{
-				pp_secondTreePart = secondTree->p_root->v_children.at(choosenChildrenIndex)->choseCrossoverPartNEWNEW(chanceOfNodeCrossover, heightOfFirstSubtree, maxHeightOfSecondSubtree);
+				pp_secondTreePart = secondTree->p_root->v_children.at(choosenChildrenIndex)->choseCrossoverPart(chanceOfNodeCrossover, heightOfFirstSubtree, maxHeightOfSecondSubtree);
 			}
 //			pp_secondTreePart = secondTree->p_root->v_children.at(choosenChildrenIndex)->choseCrossoverPartNEWNEW(chanceOfNodeCrossover, heightOfFirstSubtree, maxHeightOfSecondSubtree);
 			break;
