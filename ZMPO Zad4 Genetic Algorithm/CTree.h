@@ -13,12 +13,9 @@ public:
 	CTree(CTree &otherTree);
 	void recalculateQuality(vector<double*>* pv_dateToCalculate);
 	double getQuality();
-//	bool compCTreeByQuality(CTree* firstTree, CTree* secondTree);
 	void mutation(int chanceOfMutation);
 	void refreshExpressionStringToTest(); //toTest
-//	void crossover(CTree* secondTree, int chanceOfNodeCrossover);
-//	void crossoverNEW(CTree* secondTree, int chanceOfNodeCrossover);
-	void crossoverNEWNEW(CTree* secondTree, int chanceOfNodeCrossover);
+	void crossover(CTree* secondTree, int chanceOfNodeCrossover);
 	string expressionStringToTest; //toTest
 
 private:

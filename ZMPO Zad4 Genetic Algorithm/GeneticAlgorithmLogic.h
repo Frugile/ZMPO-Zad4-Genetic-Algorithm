@@ -17,6 +17,8 @@
 #define CHANCEOFTREECROSSOVER 50
 #define CHANCEOFNODECROSSOVER 40
 
+#define DESIREDQUALITY 1.0
+
 
 //#define FILENAME "C:\\Users\\Frugile\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\x.txt"
 #define FILENAME "C:\\Users\\Frugile\\Documents\\Visual Studio 2015\\Projects\\ZMPO Zad4 Genetic Algorithm\\Debug\\xy_pl_xx.txt" //PC
@@ -33,15 +35,14 @@ class GeneticAlgorithmLogic
 {
 public:
 	GeneticAlgorithmLogic();
-	void deletePopulation();
 	~GeneticAlgorithmLogic();
-	void sortPopulationByQuality();
-	void runGeneticAlgorithmTest();
+//	void runGeneticAlgorithmTest();
 	void runGeneticAlgorithm();
 private:
 	vector<CTree*> v_population; 
 	vector<double*>* pv_dateFromFile;
 	vector<double*>* readDateFromFile(string fileName);
 	void saveDateToFile(string fileName, string strintgToSave);
-	//	bool compCTreeByQuality(CTree* firstTree, CTree* secondTree); //nie działa, użyłem labdy
+	void deletePopulation();
+	void sortPopulationByQuality();
 };

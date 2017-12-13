@@ -28,108 +28,108 @@ void GeneticAlgorithmLogic::sortPopulationByQuality()
 	sort(v_population.begin(), v_population.end(), [](CTree* firstTree, CTree* secondTree){return firstTree->getQuality() < secondTree->getQuality();}); //lambda
 }
 
-void GeneticAlgorithmLogic::runGeneticAlgorithmTest()
-{
-
-	v_population.reserve(POPULATIONSIZE);
-	for (size_t i = 0; i < POPULATIONSIZE; i++)
-	{
-		v_population.push_back(new CTree());
-	}
-
-	pv_dateFromFile = readDateFromFile(FILENAME);
-
-	for (size_t i = 0; i < POPULATIONSIZE; i++)
-	{
-		v_population.at(i)->recalculateQuality(pv_dateFromFile); //z jakiegoś powodu, najdłużej działa przy ogromnej populacji
-	}
-
-	int stopDebugger = 42; //toTest
-
-	sortPopulationByQuality(); //toTest
-	//sort(v_population.begin(), v_population.end(), compCTreeByQuality);
-
-	stopDebugger = 42; //toTest
-
-	for (int j = 0; j < 1000; j++)
-	{
-		for (size_t i = 0; i < POPULATIONSIZE; i++)
-		{
-			if (UsefullMethods::ifOccur(CHANCEOFTREEMUTATION))
-			{
-				v_population.at(i)->mutation(CHANCEOFNODEMUTATION);
-				v_population.at(i)->refreshExpressionStringToTest();
-			}
-		}
-		stopDebugger = 42; //toTest
-	}
-
-
-
-
-	for (int k = 0; k < 1; k++)
-	{
-		vector<CTree*> v_selectedPopulation;
-		v_selectedPopulation.reserve(POPULATIONSIZE);
-		for (size_t i = 0; i < POPULATIONSIZE; i++)
-		{
-			int firstTreeIndex = UsefullMethods::randomNumber(POPULATIONSIZE) - 1;
-			int secondTreeIndex = UsefullMethods::randomNumber(POPULATIONSIZE) - 1;
-			if (v_population.at(firstTreeIndex)->getQuality() < v_population.at(secondTreeIndex)->getQuality())
-				v_selectedPopulation.push_back(new CTree(*v_population.at(firstTreeIndex)));
-			else
-				v_selectedPopulation.push_back(new CTree(*v_population.at(secondTreeIndex)));
-		}
-		deletePopulation();
-		v_population.clear();
-		v_population.swap(v_selectedPopulation);
-		sortPopulationByQuality();
-	}
-
-
-
-	stopDebugger = 42; //toTest
-
-
-
-	for (int k = 0; k < 1000; k++)
-	{
-
-		for (size_t i = 0; i < POPULATIONSIZE; i += 2)
-		{
-
-//			v_population.at(i)->crossover(v_population.at(i + 1), CHANCEOFNODECROSSOVER);
-			v_population.at(i)->crossoverNEWNEW(v_population.at(i + 1), CHANCEOFNODECROSSOVER);
-			v_population.at(i)->refreshExpressionStringToTest();
-			v_population.at(i + 1)->refreshExpressionStringToTest();
-			v_population.at(i)->recalculateQuality(pv_dateFromFile);
-			v_population.at(i + 1)->recalculateQuality(pv_dateFromFile);
-		}
+//void GeneticAlgorithmLogic::runGeneticAlgorithmTest()
+//{
 //
-//		int firstTreeIndex = UsefullMethods::randomNumber(POPULATIONSIZE) - 1;
-//		int secondTreeIndex = UsefullMethods::randomNumber(POPULATIONSIZE) - 1;
-//		v_population.at(firstTreeIndex)->crossoverNEW(v_population.at(secondTreeIndex), CHANCEOFNODECROSSOVER);
-//		v_population.at(firstTreeIndex)->refreshExpressionStringToTest();
-//		v_population.at(secondTreeIndex)->refreshExpressionStringToTest();
-//		v_population.at(firstTreeIndex)->recalculateQuality(pv_dateFromFile);
-//		v_population.at(secondTreeIndex)->recalculateQuality(pv_dateFromFile);
-
-		sortPopulationByQuality(); //toTest
-		stopDebugger = 76; //toTest yea GIT :D
-
-	}
-
-
-
-
-
-	stopDebugger = 76; //toTest 
-
-
-
-
-
-}
+//	v_population.reserve(POPULATIONSIZE);
+//	for (size_t i = 0; i < POPULATIONSIZE; i++)
+//	{
+//		v_population.push_back(new CTree());
+//	}
+//
+//	pv_dateFromFile = readDateFromFile(FILENAME);
+//
+//	for (size_t i = 0; i < POPULATIONSIZE; i++)
+//	{
+//		v_population.at(i)->recalculateQuality(pv_dateFromFile); //z jakiegoś powodu, najdłużej działa przy ogromnej populacji
+//	}
+//
+//	int stopDebugger = 42; //toTest
+//
+//	sortPopulationByQuality(); //toTest
+//	//sort(v_population.begin(), v_population.end(), compCTreeByQuality);
+//
+//	stopDebugger = 42; //toTest
+//
+//	for (int j = 0; j < 1000; j++)
+//	{
+//		for (size_t i = 0; i < POPULATIONSIZE; i++)
+//		{
+//			if (UsefullMethods::ifOccur(CHANCEOFTREEMUTATION))
+//			{
+//				v_population.at(i)->mutation(CHANCEOFNODEMUTATION);
+//				v_population.at(i)->refreshExpressionStringToTest();
+//			}
+//		}
+//		stopDebugger = 42; //toTest
+//	}
+//
+//
+//
+//
+//	for (int k = 0; k < 1; k++)
+//	{
+//		vector<CTree*> v_selectedPopulation;
+//		v_selectedPopulation.reserve(POPULATIONSIZE);
+//		for (size_t i = 0; i < POPULATIONSIZE; i++)
+//		{
+//			int firstTreeIndex = UsefullMethods::randomNumber(POPULATIONSIZE) - 1;
+//			int secondTreeIndex = UsefullMethods::randomNumber(POPULATIONSIZE) - 1;
+//			if (v_population.at(firstTreeIndex)->getQuality() < v_population.at(secondTreeIndex)->getQuality())
+//				v_selectedPopulation.push_back(new CTree(*v_population.at(firstTreeIndex)));
+//			else
+//				v_selectedPopulation.push_back(new CTree(*v_population.at(secondTreeIndex)));
+//		}
+//		deletePopulation();
+//		v_population.clear();
+//		v_population.swap(v_selectedPopulation);
+//		sortPopulationByQuality();
+//	}
+//
+//
+//
+//	stopDebugger = 42; //toTest
+//
+//
+//
+//	for (int k = 0; k < 1000; k++)
+//	{
+//
+//		for (size_t i = 0; i < POPULATIONSIZE; i += 2)
+//		{
+//
+////			v_population.at(i)->crossover(v_population.at(i + 1), CHANCEOFNODECROSSOVER);
+//			v_population.at(i)->crossover(v_population.at(i + 1), CHANCEOFNODECROSSOVER);
+//			v_population.at(i)->refreshExpressionStringToTest();
+//			v_population.at(i + 1)->refreshExpressionStringToTest();
+//			v_population.at(i)->recalculateQuality(pv_dateFromFile);
+//			v_population.at(i + 1)->recalculateQuality(pv_dateFromFile);
+//		}
+////
+////		int firstTreeIndex = UsefullMethods::randomNumber(POPULATIONSIZE) - 1;
+////		int secondTreeIndex = UsefullMethods::randomNumber(POPULATIONSIZE) - 1;
+////		v_population.at(firstTreeIndex)->crossoverNEW(v_population.at(secondTreeIndex), CHANCEOFNODECROSSOVER);
+////		v_population.at(firstTreeIndex)->refreshExpressionStringToTest();
+////		v_population.at(secondTreeIndex)->refreshExpressionStringToTest();
+////		v_population.at(firstTreeIndex)->recalculateQuality(pv_dateFromFile);
+////		v_population.at(secondTreeIndex)->recalculateQuality(pv_dateFromFile);
+//
+//		sortPopulationByQuality(); //toTest
+//		stopDebugger = 76; //toTest yea GIT :D
+//
+//	}
+//
+//
+//
+//
+//
+//	stopDebugger = 76; //toTest 
+//
+//
+//
+//
+//
+//}
 
 void GeneticAlgorithmLogic::runGeneticAlgorithm()
 {
@@ -145,11 +145,63 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 
 	for (size_t i = 0; i < POPULATIONSIZE; i++)
 	{
-		v_population.at(i)->recalculateQuality(pv_dateFromFile); //z jakiegoś powodu, najdłużej działa przy ogromnej populacji
+		v_population.at(i)->recalculateQuality(pv_dateFromFile);
 	}
 
-	double bestQualityTillNow = 100;
+	double bestQualityTillNow = v_population.at(0)->getQuality();
 
+	do
+	{
+		// SELEKCJA
+
+		vector<CTree*> v_selectedPopulation;
+		v_selectedPopulation.reserve(POPULATIONSIZE);
+		for (size_t i = 0; i < POPULATIONSIZE; i++)
+		{
+			int firstTreeIndex = UsefullMethods::randomNumberCloserToZero(POPULATIONSIZE) - 1;
+			int secondTreeIndex = UsefullMethods::randomNumberCloserToZero(POPULATIONSIZE) - 1;
+			if (v_population.at(firstTreeIndex)->getQuality() < v_population.at(secondTreeIndex)->getQuality())
+				v_selectedPopulation.push_back(new CTree(*v_population.at(firstTreeIndex)));
+			else
+				v_selectedPopulation.push_back(new CTree(*v_population.at(secondTreeIndex)));
+		}
+		deletePopulation();
+		v_population.clear();
+		v_population.swap(v_selectedPopulation);
+
+		// KRZYŻOWNIE
+
+		for (size_t i = 0; i < POPULATIONSIZE; i += 2)
+		{
+			if (UsefullMethods::ifOccur(CHANCEOFTREECROSSOVER))
+			{
+				v_population.at(i)->crossover(v_population.at(i + 1), CHANCEOFNODECROSSOVER);
+			}
+		}
+
+		// MUTACJA
+
+		for (size_t i = 0; i < POPULATIONSIZE; i++)
+		{
+			if (UsefullMethods::ifOccur(CHANCEOFTREEMUTATION))
+			{
+				v_population.at(i)->mutation(CHANCEOFNODEMUTATION);
+			}
+		}
+
+		for (size_t i = 0; i < POPULATIONSIZE; i++)
+		{
+			v_population.at(i)->recalculateQuality(pv_dateFromFile);
+		}
+
+		sortPopulationByQuality();
+		bestQualityTillNow = (v_population.at(0)->getQuality() < bestQualityTillNow) ? v_population.at(0)->getQuality() : bestQualityTillNow;
+
+	} while (bestQualityTillNow >= DESIREDQUALITY);
+
+	saveDateToFile(FILENAMERESULT, v_population.at(0)->expressionStringToTest);
+
+/*
 	while (true)
 	{
 		for (int repeat = 0; repeat < 1; repeat++)
@@ -178,7 +230,7 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 			{
 				if (UsefullMethods::ifOccur(CHANCEOFTREECROSSOVER))
 				{
-					v_population.at(i)->crossoverNEWNEW(v_population.at(i + 1), CHANCEOFNODECROSSOVER);
+					v_population.at(i)->crossover(v_population.at(i + 1), CHANCEOFNODECROSSOVER);
 //					v_population.at(i)->refreshExpressionStringToTest();
 //					v_population.at(i + 1)->refreshExpressionStringToTest();
 //					v_population.at(i)->recalculateQuality(pv_dateFromFile);
@@ -193,7 +245,6 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 				if (UsefullMethods::ifOccur(CHANCEOFTREEMUTATION))
 				{
 					v_population.at(i)->mutation(CHANCEOFNODEMUTATION);
-//					v_population.at(i)->refreshExpressionStringToTest();
 				}
 			}
 
@@ -203,7 +254,7 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 			}
 
 			sortPopulationByQuality(); //toTest
-			bestQualityTillNow = (v_population.at(0)->getQuality() < bestQualityTillNow) ? v_population.at(0)->getQuality() : bestQualityTillNow;//toTest
+			bestQualityTillNow = (v_population.at(0)->getQuality() < bestQualityTillNow) ? v_population.at(0)->getQuality() : bestQualityTillNow;
 
 		}		//for (int repeat = 0; repeat < x; repeat++)
 
@@ -215,9 +266,8 @@ void GeneticAlgorithmLogic::runGeneticAlgorithm()
 
 		sortPopulationByQuality(); //toTest
 
-		int stopDebugger = 88; //toTest 
 		saveDateToFile(FILENAMERESULT, v_population.at(0)->expressionStringToTest);
-	}
+	}*/ 
 
 }
 
@@ -268,8 +318,3 @@ void GeneticAlgorithmLogic::saveDateToFile(string fileName, string strintgToSave
 	file.close();
 }
 
-
-//bool GeneticAlgorithmLogic::compCTreeByQuality(CTree* firstTree, CTree* secondTree) //nie działa, użyłem labdy :p
-//{
-//	return firstTree->getQuality() < secondTree->getQuality();
-//}
